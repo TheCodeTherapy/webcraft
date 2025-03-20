@@ -1,0 +1,17 @@
+@import '../../common/css/tool-kits.less';
+
+.bag-item {
+	.hud-box;
+	width: 40px;
+	height: 40px;
+	&.active {
+		border-image-source: url(../../../assets/pictures/hud-box-border-active.png);
+	}
+	.bag-item-image {
+		position: relative;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 70%;
+	}
+}
