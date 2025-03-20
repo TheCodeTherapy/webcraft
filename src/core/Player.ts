@@ -1,5 +1,5 @@
 import { skinsMap } from "./Loader";
-import { symConfig } from "../controller/config";
+import { symConfig } from "./_config";
 import { PlayerObject } from "./PlayerObject";
 import { Vector3, Euler } from "three";
 

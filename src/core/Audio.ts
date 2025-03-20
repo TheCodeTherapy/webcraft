@@ -1,7 +1,7 @@
 import { blockTypes } from "./Loader";
 import { Core } from "./Core";
 import { blockLoader } from "./Loader";
-import { config } from "../controller/config";
+import { config } from "./_config";
 import { AudioLoader, AudioListener, Audio as ThreeAudio } from "three";
 
 export class Audio {

@@ -1,6 +1,6 @@
 import { Mesh } from "three";
 import { highLightBlockMesh } from "../../core/Loader";
-import { config } from "../config";
+import { config } from "../../core/_config";
 import { Core } from "../../core/Core";
 import { relativeOperateCollisionCheck } from "../../core/Collisions";
 import { BlockLog } from "../../utils/types/block";

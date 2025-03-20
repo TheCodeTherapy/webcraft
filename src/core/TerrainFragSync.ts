@@ -3,8 +3,8 @@ import { ImprovedNoise } from "three/examples/jsm/math/ImprovedNoise";
 import { iBlockFragment } from "../utils/types/block";
 import { blockTypes, treeTypes, blockGeom, blockLoader, cloudGeom, cloudMaterial } from "./Loader";
 import weatherTypes from "./Biomes";
-import { symConfig, config } from "../controller/config";
-import Log from "../controller/log";
+import { symConfig, config } from "./_config";
+import Log from "./Log";
 
 function insertInstancedBlock(fragment: iBlockFragment, typeIdx: number, x: number, y: number, z: number) {
   if (fragment.idMap.has(`${x}_${y}_${z}`) && y > -1000000) return;

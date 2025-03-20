@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { Player } from "../../core/Player";
 import { skinsMap } from "../../core/Loader";
-import { config } from "../config";
+import { config } from "../../core/_config";
 
 class PlayersController {
   players: Player[];

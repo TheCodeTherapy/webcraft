@@ -3,7 +3,7 @@ import { ImprovedNoise } from "three/examples/jsm/math/ImprovedNoise";
 import { iBlockFragment } from "../utils/types/block";
 import { Core } from "./Core";
 import { TerrainGenerate } from "./TerrainGenerate";
-import { config, symConfig } from "../controller/config";
+import { config, symConfig } from "./_config";
 import { blockLoader, blockGeom, cloudGeom, cloudMaterial } from "./Loader";
 
 export class Terrain {

@@ -1,4 +1,41 @@
-import SNode from "./snode";
+import { BlockLog } from "./Types";
+
+class SNode<K, V> {
+  key: K | null;
+  value: V | null;
+  left: SNode<K, V> | null;
+  right: SNode<K, V> | null;
+  parent: SNode<K, V> | null;
+  empty: boolean;
+
+  constructor(parent: SNode<K, V> | null, k = null, v = null) {
+    this.empty = true;
+    this.left = null;
+    this.right = null;
+    this.value = null;
+    this.key = null;
+    this.parent = parent;
+    if (k !== null) {
+      this.empty = false;
+      this.key = k;
+      this.value = v;
+      this.left = new SNode(this);
+      this.right = new SNode(this);
+    }
+  }
+
+  setValue(k: K, v: V) {
+    if (this.empty) {
+      this.empty = false;
+      this.key = k;
+      this.value = v;
+      this.left = new SNode(this);
+      this.right = new SNode(this);
+    } else {
+      this.value = v;
+    }
+  }
+}
 
 class Splay<K, V> {
   root: SNode<K, V>;
@@ -175,4 +212,73 @@ class Splay<K, V> {
   }
 }
 
-export default Splay;
+class Log {
+  data: Splay<number, Splay<number, Map<number, BlockLog>>>;
+
+  constructor(logs: BlockLog[]) {
+    this.data = new Splay();
+    this.load(logs);
+  }
+
+  load(logs: BlockLog[]) {
+    logs.forEach((d) => this.insert(d));
+  }
+
+  insert(blocklog: BlockLog) {
+    const { posX, posY, posZ } = blocklog;
+    const treeY = this.data.queryAndInit(posX, new Splay()).value!;
+    const mapZ = treeY.queryAndInit(posZ, new Map()).value!;
+    mapZ.set(posY, blocklog);
+  }
+
+  query(x: number | null = null, y: number | null = null, z: number | null = null) {
+    if (x === null) return this;
+    const treeY = this.data.query(x)?.value;
+    if (y === null || !treeY) return treeY;
+    const mapZ = treeY.query(y)?.value;
+    if (z === null || !mapZ) return mapZ;
+    return mapZ.get(z);
+  }
+
+  next(x: number, y = null) {
+    if (y === null) return this.data.next(x);
+    const treeY = this.data.query(x);
+    return treeY?.value?.next(y);
+  }
+
+  prev(x: number, y = null) {
+    if (y === null) return this.data.prev(x);
+    const treeY = this.data.query(x);
+    return treeY?.value?.prev(y);
+  }
+
+  queryArea(stx: number, edx: number, sty: number, edy: number) {
+    const res = [] as BlockLog[];
+    let treeY = this.data.lowerBound(stx);
+    while (treeY && treeY.key! <= edx) {
+      let mapZ = treeY.value!.lowerBound(sty);
+      while (mapZ && mapZ.key! <= edy) {
+        res.push(...[...mapZ.value!].map((d) => d[1]));
+        mapZ = treeY.value!.nodeNext(mapZ);
+      }
+      treeY = this.data.nodeNext(treeY);
+    }
+    return res;
+  }
+
+  export() {
+    const res = [] as BlockLog[];
+    let treeY = this.data.begin();
+    while (treeY && !treeY.empty) {
+      let mapZ = treeY.value!.begin();
+      while (mapZ && !mapZ.empty) {
+        res.push(...[...mapZ.value!].map((d) => d[1]));
+        mapZ = treeY.value!.nodeNext(mapZ)!;
+      }
+      treeY = this.data.nodeNext(treeY)!;
+    }
+    return res;
+  }
+}
+
+export default Log;

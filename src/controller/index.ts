@@ -4,10 +4,10 @@ import UI from "../ui";
 import { Core } from "../core/Core";
 import UiController from "./ui-controller";
 import { GameController } from "./game-controller/GameController";
-import { config, defaultConfig, language } from "./config";
+import { config, defaultConfig, language } from "../core/_config";
 import { deepCopy } from "../utils/deep-copy";
 import biomesConfig from "../core/Biomes";
-import Log from "./log";
+import Log from "../core/Log";
 import MultiPlay from "./MultiPlay";
 
 export class Controller {

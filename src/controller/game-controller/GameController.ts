@@ -2,10 +2,10 @@ import { blockTypes } from "../../core/Loader";
 import { Core } from "../../core/Core";
 import { GameControllerBlock } from "./GameControllerBlock";
 import { GameControllerMove } from "./GameControllerMove";
-import { config } from "../config";
+import { config } from "../../core/_config";
 import { relativeOperateCollisionCheck } from "../../core/Collisions";
 import { Controller } from "..";
-import { actionBlockEvent, BlockLog } from "../../utils/types/block";
+import { actionBlockEvent, BlockLog } from "../../core/Types";
 import weatherType from "../../core/Biomes";
 
 export class GameController {

@@ -1,5 +1,5 @@
 import { Core } from "../../core/Core";
-import { config, symConfig } from "../config/index";
+import { config, symConfig } from "../../core/_config";
 import { getTargetPosition, relativeCollisionCheckAll } from "../../core/Collisions";
 import { GameController } from "./GameController";
 

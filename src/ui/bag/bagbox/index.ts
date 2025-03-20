@@ -1,6 +1,6 @@
 import { blockTypes, blockLoader } from "../../../core/Loader";
 import "./css/style.less";
-import { config, language } from "../../../controller/config";
+import { config, language } from "../../../core/_config";
 
 class BagBoxPlugin {
   host: { onToggleBag: () => void };

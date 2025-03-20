@@ -3,7 +3,7 @@ import BagPcPlugin from "./pc";
 import BagMobilePlugin from "./mobile/index";
 import BagBoxPlugin from "./bagbox";
 import "./css/style.less";
-import { config } from "../../controller/config";
+import { config } from "../../core/_config";
 import BagXboxPlugin from "./xbox";
 import BagPsPlugin from "./ps";
 

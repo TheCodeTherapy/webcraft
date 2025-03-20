@@ -1,5 +1,5 @@
 import { blockLoader, blockTypes } from "./Loader";
-import { config, symConfig } from "../controller/config";
+import { config, symConfig } from "./_config";
 import { Audio } from "./Audio";
 import { Terrain } from "./Terrain";
 import { BlockAction } from "./BlockAction";

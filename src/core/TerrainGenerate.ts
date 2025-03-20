@@ -1,5 +1,5 @@
 import { blockTypes, treeTypes } from "./Loader";
-import { config, symConfig } from "../controller/config";
+import { config, symConfig } from "./_config";
 import "../utils/types/worker.d.ts";
 import Worker from "./TerrainWorker?worker";
 import { Terrain } from "./Terrain";
