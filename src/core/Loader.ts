@@ -372,13 +372,14 @@ import soulsandStep from "../assets/sounds/step/soulsand.ogg";
 import stoneStep from "../assets/sounds/step/stone.ogg";
 import woodStep from "../assets/sounds/step/wood.ogg";
 import {
-  BoxBufferGeometry,
+  BoxGeometry,
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
   NearestFilter,
   Texture,
-  TextureLoader
+  TextureLoader,
+  Audio
 } from "three";
 
 // Block type definitions
@@ -445,8 +446,8 @@ export interface BlockProperties {
   accessible?: boolean;
   step?: string;
   break?: string;
-  stepAudio?: THREE.Audio;
-  breakAudio?: THREE.Audio;
+  stepAudio?: Audio;
+  breakAudio?: Audio;
 }
 
 // Define block properties including name, icon, and texture
@@ -912,9 +913,9 @@ blockTypes.forEach(
 );
 
 // Block geometry
-export const blockGeom = new BoxBufferGeometry(1, 1, 1);
+export const blockGeom = new BoxGeometry(1, 1, 1);
 // Cloud geometry
-export const cloudGeom = new BoxBufferGeometry(4, 3, 6);
+export const cloudGeom = new BoxGeometry(4, 3, 6);
 // Cloud material
 export const cloudMaterial = new MeshBasicMaterial({ color: 0x959595, opacity: 0.8, transparent: true });
 // Tree types [trunk, leaves]
@@ -924,7 +925,7 @@ export const treeTypes = [
 ];
 // Highlight block for selection
 export const highLightBlockMesh = new Mesh(
-  new BoxBufferGeometry(1.02, 1.02, 1.02),
+  new BoxGeometry(1.02, 1.02, 1.02),
   new MeshBasicMaterial({ opacity: 0.2, transparent: true })
 );
 // Character skin textures

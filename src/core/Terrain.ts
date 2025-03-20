@@ -73,15 +73,15 @@ export class Terrain {
   // Initializes the world with lighting and initial terrain generation
   buildWorld() {
     // Set up scene lighting
-    const sunLight = new THREE.PointLight(0xffffff, 0.5);
+    const sunLight = new THREE.PointLight(0xffffff, 500000.0);
     sunLight.position.set(500, 500, 500);
     this.core.scene.add(sunLight);
 
-    const sunLight2 = new THREE.PointLight(0xffffff, 0.2);
+    const sunLight2 = new THREE.PointLight(0xffffff, 500000.0);
     sunLight2.position.set(-500, 500, -500);
     this.core.scene.add(sunLight2);
 
-    const reflectionLight = new THREE.AmbientLight(0x404040);
+    const reflectionLight = new THREE.AmbientLight(0x404040, 0.5);
     this.core.scene.add(reflectionLight);
 
     this.tryUpdateAll();

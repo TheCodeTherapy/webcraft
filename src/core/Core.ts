@@ -5,6 +5,7 @@ import { Terrain } from "./Terrain";
 import { BlockAction } from "./BlockAction";
 import { Controller } from "../controller";
 import { PerspectiveCamera, Scene, WebGLRenderer, FogExp2, Color, Texture, MeshStandardMaterial } from "three";
+import * as THREE from "three";
 
 export class Core {
   camera: PerspectiveCamera;
@@ -52,6 +53,9 @@ export class Core {
     this.scene.background = new Color(backgroundColor);
 
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this.renderer.toneMappingExposure = 1.0;
+    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     document.getElementById("game-stage")?.appendChild(this.renderer.domElement);
   }
 

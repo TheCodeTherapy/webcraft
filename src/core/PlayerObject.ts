@@ -38,14 +38,15 @@ function setUVs(
   const uvAttr = box.attributes.uv as BufferAttribute;
 
   // prettier-ignore
-  uvAttr.copyVector2sArray([
-		right[3],   right[2], right[0],   right[1],
-		left[3],     left[2], left[0],     left[1],
-		top[3],       top[2], top[0],       top[1],
-		bottom[0], bottom[1], bottom[3], bottom[2],
-		front[3],   front[2], front[0],   front[1],
-		back[3],     back[2], back[0],     back[1],
-	]);
+  const uvs = [
+    right[3], right[2], right[0], right[1],
+    left[3], left[2], left[0], left[1],
+    top[3], top[2], top[0], top[1],
+    bottom[0], bottom[1], bottom[3], bottom[2],
+    front[3], front[2], front[0], front[1],
+    back[3], back[2], back[0], back[1],
+  ];
+  uvs.forEach((uv, i) => uvAttr.setXY(i, uv.x, uv.y));
   uvAttr.needsUpdate = true;
 }
 
