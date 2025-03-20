@@ -9,7 +9,7 @@ import {
   Vector2,
   BoxGeometry
 } from "three";
-import BodyPart from "./bodyPart";
+import { PlayerBodyPart } from "./PlayerBodyPart";
 
 function setUVs(
   box: BoxGeometry,
@@ -54,12 +54,12 @@ function setSkinUVs(box: BoxGeometry, u: number, v: number, width: number, heigh
 }
 
 export class PlayerObject extends Group {
-  readonly head: BodyPart;
-  readonly body: BodyPart;
-  readonly rightArm: BodyPart;
-  readonly leftArm: BodyPart;
-  readonly rightLeg: BodyPart;
-  readonly leftLeg: BodyPart;
+  readonly head: PlayerBodyPart;
+  readonly body: PlayerBodyPart;
+  readonly rightArm: PlayerBodyPart;
+  readonly leftArm: PlayerBodyPart;
+  readonly rightLeg: PlayerBodyPart;
+  readonly leftLeg: PlayerBodyPart;
 
   private modelListeners: Array<() => void> = []; // called when model(slim property) is changed
 
@@ -97,7 +97,7 @@ export class PlayerObject extends Group {
     setSkinUVs(head2Box, 32, 0, 8, 8, 8);
     const head2Mesh = new Mesh(head2Box, layer2Material);
 
-    this.head = new BodyPart(headMesh, head2Mesh);
+    this.head = new PlayerBodyPart(headMesh, head2Mesh);
     this.head.name = "head";
     this.head.add(headMesh, head2Mesh);
     headMesh.position.y = 4;
@@ -113,7 +113,7 @@ export class PlayerObject extends Group {
     setSkinUVs(body2Box, 16, 32, 8, 12, 4);
     const body2Mesh = new Mesh(body2Box, layer2Material);
 
-    this.body = new BodyPart(bodyMesh, body2Mesh);
+    this.body = new PlayerBodyPart(bodyMesh, body2Mesh);
     this.body.name = "body";
     this.body.add(bodyMesh, body2Mesh);
     this.body.position.y = -6;
@@ -145,7 +145,7 @@ export class PlayerObject extends Group {
     });
     rightArmPivot.position.y = -4;
 
-    this.rightArm = new BodyPart(rightArmMesh, rightArm2Mesh);
+    this.rightArm = new PlayerBodyPart(rightArmMesh, rightArm2Mesh);
     this.rightArm.name = "rightArm";
     this.rightArm.add(rightArmPivot);
     this.rightArm.position.x = -5;
@@ -178,7 +178,7 @@ export class PlayerObject extends Group {
     });
     leftArmPivot.position.y = -4;
 
-    this.leftArm = new BodyPart(leftArmMesh, leftArm2Mesh);
+    this.leftArm = new PlayerBodyPart(leftArmMesh, leftArm2Mesh);
     this.leftArm.name = "leftArm";
     this.leftArm.add(leftArmPivot);
     this.leftArm.position.x = 5;
@@ -198,7 +198,7 @@ export class PlayerObject extends Group {
     rightLegPivot.add(rightLegMesh, rightLeg2Mesh);
     rightLegPivot.position.y = -6;
 
-    this.rightLeg = new BodyPart(rightLegMesh, rightLeg2Mesh);
+    this.rightLeg = new PlayerBodyPart(rightLegMesh, rightLeg2Mesh);
     this.rightLeg.name = "rightLeg";
     this.rightLeg.add(rightLegPivot);
     this.rightLeg.position.x = -1.9;
@@ -219,7 +219,7 @@ export class PlayerObject extends Group {
     leftLegPivot.add(leftLegMesh, leftLeg2Mesh);
     leftLegPivot.position.y = -6;
 
-    this.leftLeg = new BodyPart(leftLegMesh, leftLeg2Mesh);
+    this.leftLeg = new PlayerBodyPart(leftLegMesh, leftLeg2Mesh);
     this.leftLeg.name = "leftLeg";
     this.leftLeg.add(leftLegPivot);
     this.leftLeg.position.x = 1.9;

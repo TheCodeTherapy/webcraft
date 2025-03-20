@@ -1,5 +1,5 @@
 import { ImprovedNoise } from "three/examples/jsm/math/ImprovedNoise";
-import { BlockLog, iBlockFragment } from "../../../utils/types/block";
+import { BlockLog, iBlockFragment } from "../utils/types/block";
 
 function insertInstancedBlock(fragment: iBlockFragment, typeIdx: number, x: number, y: number, z: number) {
   if (fragment.idMap.has(`${x}_${y}_${z}`) && y > -1000000) return;
@@ -12,7 +12,6 @@ function insertInstancedBlock(fragment: iBlockFragment, typeIdx: number, x: numb
   fragment.types[typeIdx].blocks.count += 1;
 }
 
-// 对于一个区间, 生成BlockFragsa
 onmessage = (
   msg: MessageEvent<{
     timestamp: number;
@@ -95,9 +94,9 @@ onmessage = (
         for (let j = curZ; j < curZ + fragmentSize; j += 1) {
           const y = Math.floor(noiseGen.noise(i / seedGap, j / seedGap, seed) * maxHeight);
           if (y < horizonHeight) {
-            // surface 生成
+            // surface
             insertInstancedBlock(blockFragment, base, i, y, j);
-            // water 生成
+            // water
             for (let yy = y + 1; yy <= horizonHeight; yy += 1) insertInstancedBlock(blockFragment, water, i, yy, j);
           } else {
             insertInstancedBlock(blockFragment, surface, i, y, j);
@@ -138,7 +137,7 @@ onmessage = (
             }
           }
 
-          // cloud 生成
+          // clouds
           const cloudGen = noiseGen.noise(i / cloudSeedGap, j / cloudSeedGap, cloudSeed);
           if (cloudGen > 0.8 || cloudGen < -0.8) {
             (blockFragment.cloudPos as number[]).push(

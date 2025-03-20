@@ -1,9 +1,7 @@
-// 块类型声明
-import * as THREE from "three";
+import { InstancedMesh, Group, Mesh } from "three";
 
 export interface iBlockFragmentSingleType {
-  instancedMesh?: THREE.InstancedMesh;
-  // meshGroup?: THREE.Group;
+  instancedMesh?: InstancedMesh;
   blocks: {
     type: string;
     count: number;
@@ -16,15 +14,14 @@ export interface iBlockFragment {
   timestamp: number;
   posX: number;
   posZ: number;
-  group?: THREE.Group;
-  templateMesh: THREE.Mesh[];
+  group?: Group;
+  templateMesh: Mesh[];
   types: iBlockFragmentSingleType[];
   idMap: Map<string, { temp: boolean; idx: number; typeIdx?: number }>;
   cloudPos?: number[];
-  cloudMesh?: THREE.InstancedMesh;
+  cloudMesh?: InstancedMesh;
 }
 
-// eslint-disable-next-line
 export enum actionBlockEvent {
   ADD,
   REMOVE

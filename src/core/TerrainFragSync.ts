@@ -1,10 +1,10 @@
 import * as THREE from "three";
 import { ImprovedNoise } from "three/examples/jsm/math/ImprovedNoise";
-import { iBlockFragment } from "../../../utils/types/block";
-import { blockTypes, treeTypes, blockGeom, blockLoader, cloudGeom, cloudMaterial } from "../../loader";
-import weatherTypes from "../../weather";
-import { symConfig, config } from "../../../controller/config";
-import Log from "../../../controller/log";
+import { iBlockFragment } from "../utils/types/block";
+import { blockTypes, treeTypes, blockGeom, blockLoader, cloudGeom, cloudMaterial } from "./Loader";
+import weatherTypes from "./Biomes";
+import { symConfig, config } from "../controller/config";
+import Log from "../controller/log";
 
 function insertInstancedBlock(fragment: iBlockFragment, typeIdx: number, x: number, y: number, z: number) {
   if (fragment.idMap.has(`${x}_${y}_${z}`) && y > -1000000) return;
@@ -35,11 +35,14 @@ export function generateFragSync(
   edy = Math.ceil(edy);
   edz = Math.ceil(edz);
 
-  const { weather } = config;
-  if (weather === null) return;
+  const { weather, seed, cloudSeed, treeSeed } = config;
+
+  if (seed === null || cloudSeed === null || treeSeed === null || weather === null) {
+    return;
+  }
+
   const noiseGen = new ImprovedNoise();
-  const { seed, cloudSeed, treeSeed } = config;
-  if (seed === null || cloudSeed === null || treeSeed === null) return;
+
   const [water, surface, base] = weatherTypes[weather];
   const { seedGap, cloudSeedGap, treeSeedGap } = symConfig.noiseGap;
   const { horizonHeight, treeBaseHeight, maxHeight, skyHeight } = symConfig.stage;

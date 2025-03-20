@@ -1,17 +1,17 @@
-import { blockTypes } from "../../core/loader/index";
-import Core from "../../core";
-import BlockController from "./block-controller";
-import MoveController from "./move-controller";
+import { blockTypes } from "../../core/Loader";
+import { Core } from "../../core/Core";
+import { GameControllerBlock } from "./GameControllerBlock";
+import { GameControllerMove } from "./GameControllerMove";
 import { config } from "../config";
-import { relativeOperateCollisionCheck } from "../../core/collision";
+import { relativeOperateCollisionCheck } from "../../core/Collisions";
 import { Controller } from "..";
 import { actionBlockEvent, BlockLog } from "../../utils/types/block";
-import weatherType from "../../core/weather";
+import weatherType from "../../core/Biomes";
 
-class GameController {
+export class GameController {
   core: Core;
-  blockController: BlockController;
-  moveController: MoveController;
+  blockController: GameControllerBlock;
+  moveController: GameControllerMove;
   host: Controller;
 
   nextTrickMoveTask: {
@@ -32,8 +32,8 @@ class GameController {
   constructor(core: Core, host: Controller) {
     this.core = core;
     this.host = host;
-    this.blockController = new BlockController(this.core, this);
-    this.moveController = new MoveController(this.core, this);
+    this.blockController = new GameControllerBlock(this.core, this);
+    this.moveController = new GameControllerMove(this.core, this);
     this.nextTrickBlockTask = [];
     this.nextTrickMoveTask = {
       font: 0,
@@ -44,16 +44,17 @@ class GameController {
       viewHorizontal: 0,
       viewVertical: 0
     };
+    this.hasChange = false;
   }
 
-  handleMoveAction(args) {
+  handleMoveAction(args: { font: number; left: number; up: number }) {
     this.nextTrickMoveTask = {
       ...this.nextTrickMoveTask,
       ...args
     };
   }
 
-  handleViewAction({ vertical, horizontal }) {
+  handleViewAction({ vertical, horizontal }: { vertical: number; horizontal: number }) {
     this.nextTrickViewTask.viewHorizontal += horizontal;
     this.nextTrickViewTask.viewVertical += vertical;
   }
@@ -84,6 +85,10 @@ class GameController {
       action: actionBlockEvent.REMOVE
     };
     if (key === actionBlockEvent.ADD) {
+      if (!collision.obj.face) {
+        console.log("no face");
+        return;
+      }
       target.posX += collision.obj.face.normal.x;
       target.posY += collision.obj.face.normal.y;
       target.posZ += collision.obj.face.normal.z;
@@ -98,7 +103,6 @@ class GameController {
     this.nextTrickBlockTask.push(target);
   }
 
-  // 当下一帧渲染时执行请求, 并重设状态
   update(deltaTime: number) {
     this.moveController.viewDirectionMove(this.nextTrickViewTask, deltaTime);
     this.moveController.positionMove(this.nextTrickMoveTask, deltaTime);
@@ -108,7 +112,7 @@ class GameController {
     this.nextTrickBlockTask.length = 0;
   }
 
-  checkRemoveFloor(target) {
+  checkRemoveFloor(target: BlockLog) {
     this.testAndInsert({ ...target, posX: target.posX + 1 });
     this.testAndInsert({ ...target, posX: target.posX - 1 });
     this.testAndInsert({ ...target, posZ: target.posZ + 1 });
@@ -117,16 +121,17 @@ class GameController {
     this.testAndInsert({ ...target, posY: target.posY + 1 });
   }
 
-  testAndInsert(target) {
+  testAndInsert(target: BlockLog) {
     if (
       this.core.terrain.getFloorHeight(target.posX, target.posZ) <= target.posY ||
       this.host.log.query(target.posX, target.posZ, target.posY) ||
       this.core.terrain.hasBlock(target.posX, target.posZ, target.posY)
     )
       return;
+    if (config.weather === null) return;
     this.host.log.insert({ ...target, type: blockTypes[weatherType[config.weather][2]] });
     this.nextTrickBlockTask.push({ ...target, type: blockTypes[weatherType[config.weather][2]] });
   }
 }
 
-export { GameController, actionBlockEvent };
+export { actionBlockEvent };

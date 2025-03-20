@@ -1,14 +1,14 @@
-import * as THREE from "three";
-import { highLightBlockMesh } from "../../../core/loader/index";
-import { config } from "../../config";
-import Core from "../../../core";
-import { relativeOperateCollisionCheck } from "../../../core/collision";
-import { BlockLog } from "../../../utils/types/block";
-import { GameController } from "..";
+import { Mesh } from "three";
+import { highLightBlockMesh } from "../../core/Loader";
+import { config } from "../config";
+import { Core } from "../../core/Core";
+import { relativeOperateCollisionCheck } from "../../core/Collisions";
+import { BlockLog } from "../../utils/types/block";
+import { GameController } from "./GameController";
 
-class BlockController {
+export class GameControllerBlock {
   core: Core;
-  curHighlight: THREE.Mesh | null;
+  curHighlight: Mesh | null;
   host: GameController;
 
   constructor(core: Core, host: GameController) {
@@ -17,7 +17,6 @@ class BlockController {
     this.curHighlight = highLightBlockMesh;
   }
 
-  // 处理注册的块事件
   update(blocks: BlockLog[], ignoreMultiPlay = false) {
     if (this.host.host.multiPlay.working && !ignoreMultiPlay) this.host.host.multiPlay.insertLog([...blocks]);
     blocks.forEach((d) => {
@@ -26,7 +25,6 @@ class BlockController {
     });
   }
 
-  // 高亮当前块
   highlightCurrentBlock() {
     const collision = relativeOperateCollisionCheck({
       posX: this.core.camera.position.x,
@@ -43,12 +41,14 @@ class BlockController {
     if (collision) {
       let { posX, posY, posZ } = collision.pos;
       [posX, posY, posZ] = [posX, posY, posZ].map(Math.round);
-      this.curHighlight.position.set(posX, posY, posZ);
-      this.core.scene.add(this.curHighlight);
+      if (this.curHighlight) {
+        this.curHighlight.position.set(posX, posY, posZ);
+        this.core.scene.add(this.curHighlight);
+      }
     } else {
-      this.core.scene.remove(this.curHighlight);
+      if (this.curHighlight) {
+        this.core.scene.remove(this.curHighlight);
+      }
     }
   }
 }
-
-export default BlockController;

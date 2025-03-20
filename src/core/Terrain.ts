@@ -1,17 +1,17 @@
 import * as THREE from "three";
 import { ImprovedNoise } from "three/examples/jsm/math/ImprovedNoise";
-import { iBlockFragment } from "../../utils/types/block";
-import Core from "..";
-import Generate from "./generate";
-import { config, symConfig } from "../../controller/config";
-import { blockLoader, blockGeom, cloudGeom, cloudMaterial } from "../loader";
+import { iBlockFragment } from "../utils/types/block";
+import { Core } from "./Core";
+import { TerrainGenerate } from "./TerrainGenerate";
+import { config, symConfig } from "../controller/config";
+import { blockLoader, blockGeom, cloudGeom, cloudMaterial } from "./Loader";
 
-class Terrain {
+export class Terrain {
   core: Core;
   seed: number;
   cloudSeed: number;
   treeSeed: number;
-  generator: Generate;
+  generator: TerrainGenerate;
   size: number;
   fragmentSize: number; // Size of each terrain fragment
   originX: number;
@@ -21,7 +21,7 @@ class Terrain {
 
   constructor(core: Core) {
     this.core = core;
-    this.generator = new Generate(this);
+    this.generator = new TerrainGenerate(this);
     this.seed = 0;
     this.cloudSeed = 0;
     this.treeSeed = 0;
@@ -265,5 +265,3 @@ class Terrain {
     return { x: blkX, z: blkZ };
   }
 }
-
-export default Terrain;

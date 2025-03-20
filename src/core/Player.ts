@@ -1,9 +1,9 @@
-import { skinsMap } from "../loader/index";
-import { symConfig } from "../../controller/config";
-import { PlayerObject } from "./playerObject";
+import { skinsMap } from "./Loader";
+import { symConfig } from "../controller/config";
+import { PlayerObject } from "./PlayerObject";
 import { Vector3, Euler } from "three";
 
-class Player {
+export class Player {
   player: PlayerObject;
   target: Vector3;
   position: Vector3;
@@ -88,5 +88,3 @@ class Player {
     this;
   }
 }
-
-export default Player;

@@ -1,9 +1,9 @@
-import Core from "../../../core";
-import { config, symConfig } from "../../config/index";
-import { getTargetPosition, relativeCollisionCheckAll } from "../../../core/collision";
-import { GameController } from "..";
+import { Core } from "../../core/Core";
+import { config, symConfig } from "../config/index";
+import { getTargetPosition, relativeCollisionCheckAll } from "../../core/Collisions";
+import { GameController } from "./GameController";
 
-class MoveController {
+export class GameControllerMove {
   core: Core;
   host: GameController;
   jumping: boolean;
@@ -92,5 +92,3 @@ class MoveController {
     this.core.camera.updateMatrix();
   }
 }
-
-export default MoveController;

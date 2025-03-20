@@ -1,10 +1,10 @@
 import * as THREE from "three";
-import { blockTypes } from "../loader/index";
-import Core from "..";
-import { blockLoader } from "../loader";
-import { config } from "../../controller/config";
+import { blockTypes } from "./Loader";
+import { Core } from "./Core";
+import { blockLoader } from "./Loader";
+import { config } from "../controller/config";
 
-class Audio {
+export class Audio {
   core: Core;
   support: boolean;
 
@@ -47,5 +47,3 @@ class Audio {
     this;
   }
 }
-
-export default Audio;

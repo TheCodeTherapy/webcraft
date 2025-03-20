@@ -1,11 +1,11 @@
-import { blockTypes, treeTypes } from "../../loader/index";
-import { config, symConfig } from "../../../controller/config";
-import "../../../utils/types/worker.d.ts";
-import Worker from "./worker?worker";
-import Terrain from "..";
-import weatherTypes from "../../weather";
+import { blockTypes, treeTypes } from "./Loader";
+import { config, symConfig } from "../controller/config";
+import "../utils/types/worker.d.ts";
+import Worker from "./TerrainWorker?worker";
+import { Terrain } from "./Terrain";
+import weatherTypes from "./Biomes";
 
-class Generate {
+export class TerrainGenerate {
   terrain: Terrain;
 
   noiseSeed: {
@@ -162,5 +162,3 @@ class Generate {
     }
   }
 }
-
-export default Generate;

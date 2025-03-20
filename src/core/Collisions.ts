@@ -1,12 +1,11 @@
-import { generateFragSync } from "../terrain/generate/generateFragSync";
-import { symConfig, config } from "../../controller/config";
-import { getDir } from "../../utils/get-dir";
-import { iBlockFragment } from "../../utils/types/block";
-import Log from "../../controller/log";
+import { generateFragSync } from "./TerrainFragSync";
+import { symConfig, config } from "../controller/config";
+import { getDir } from "../utils/get-dir";
+import { iBlockFragment } from "../utils/types/block";
+import Log from "../controller/log";
 import { Euler, Intersection, Raycaster } from "three";
 import { Vector3 } from "three";
 
-// Types for collision system
 interface CollisionResult {
   obj: Intersection;
   pos: { posX: number; posY: number; posZ: number };
@@ -409,6 +408,7 @@ export function getTargetPosition({ posX, posY, posZ, font, left, up, core, delt
     symConfig.actionsScale.jump *
     symConfig.actionsScale.moveScale *
     deltaTime;
+
   // Absolute movement direction
   const absolute = new Vector3(-left, up, -font).applyEuler(new Euler(0, core.camera.rotation.y, 0, "YXZ"));
   absolute.x *= scaleXOZ;

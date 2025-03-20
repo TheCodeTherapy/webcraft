@@ -1,12 +1,12 @@
-import { blockLoader, blockTypes } from "./loader";
+import { blockLoader, blockTypes } from "./Loader";
 import { config, symConfig } from "../controller/config";
-import Audio from "./audio";
-import Terrain from "./terrain";
-import BlockAction from "./block-action";
+import { Audio } from "./Audio";
+import { Terrain } from "./Terrain";
+import { BlockAction } from "./BlockAction";
 import { Controller } from "../controller";
 import { PerspectiveCamera, Scene, WebGLRenderer, FogExp2, Color, Texture, MeshStandardMaterial } from "three";
 
-class Core {
+export class Core {
   camera: PerspectiveCamera;
   scene: Scene;
   renderer: WebGLRenderer;
@@ -55,7 +55,7 @@ class Core {
     document.getElementById("game-stage")?.appendChild(this.renderer.domElement);
   }
 
-  tryRender() {
+  tryRender(_deltaTime = 0) {
     this.terrain.tryUpdateScene();
     this.renderer.render(this.scene, this.camera);
   }
@@ -79,5 +79,3 @@ class Core {
     }
   }
 }
-
-export default Core;

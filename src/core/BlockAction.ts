@@ -1,9 +1,9 @@
 import * as THREE from "three";
-import { blockGeom, blockLoader } from "../loader/index";
-import { BlockLog } from "../../utils/types/block";
-import Core from "..";
+import { blockGeom, blockLoader } from "./Loader";
+import { BlockLog } from "../utils/types/block";
+import { Core } from "./Core";
 
-class BlockAction {
+export class BlockAction {
   core: Core;
   matrix: THREE.Matrix4;
 
@@ -80,5 +80,3 @@ class BlockAction {
     return { x: blkX, z: blkZ };
   }
 }
-
-export default BlockAction;
