@@ -6,29 +6,18 @@ import { config, language } from "../../../core/_config";
 
 class ActionPluginMobile {
   elem: HTMLElement;
-
   controller: Controller;
-
   joyStick: JoyStick;
-
   jumpButton: HTMLElement;
-
   removeBlockButton: HTMLElement;
-
   createBlockButton: HTMLElement;
-
   openMenuButton: HTMLButtonElement;
-
   jumpDownButton: HTMLElement;
-
   actionWallpaper: HTMLElement;
 
   touchMoveListener: (Event) => boolean;
-
   touchMoveInitListener: (Event) => boolean;
-
   stopInterferenceJoystick: (Event) => boolean;
-
   lastTouchMovePosition: unknown;
 
   constructor(el: HTMLElement, controller: Controller) {

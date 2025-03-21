@@ -13,13 +13,10 @@ class BagBoxPlugin {
 
   working: boolean;
 
-  // eslint-disable-next-line
   allItemClickListener: (e: MouseEvent) => void;
 
-  // eslint-disable-next-line
   activeItemClickListener: (e: MouseEvent) => void;
 
-  // eslint-disable-next-line
   bagCloseClickListener: (e: MouseEvent) => void;
 
   constructor(el: HTMLElement, host) {

@@ -8,7 +8,6 @@ body {
 	overflow: hidden;
 }
 
-// 菜单组件
 #menu,
 .mc-menu {
 	padding: 50px 0;
@@ -16,12 +15,12 @@ body {
 	flex-direction: column;
 	justify-content: space-around;
 	overflow-y: hidden;
-	// 开局背景图
+
 	&.background-image {
 		background: center url(../../../assets/pictures/background.jpg) no-repeat;
 		background-size: 100% 100%;
 	}
-	// 开局后菜单的纯色背景
+
 	&.background-pain-color {
 		background: @color-background-semi-trans-grey;
 	}
@@ -30,7 +29,7 @@ body {
 		overflow-y: auto;
 		overflow-x: hidden;
 	}
-	// logo
+
 	#title {
 		position: fixed;
 		top: 50px;
@@ -39,7 +38,7 @@ body {
 		width: 100%;
 		background-size: 560px auto;
 	}
-	// 菜单盒
+
 	.box {
 		padding: 15px;
 		margin: 0 auto;
@@ -47,7 +46,7 @@ body {
 		flex-direction: column;
 		align-items: center;
 		gap: 10px;
-		// 显示边框与背景
+
 		&.border-box {
 			box-shadow: @box-shadow;
 			background-color: @color-btn-gray;
@@ -78,14 +77,13 @@ body {
 		}
 	}
 
-	// 按钮
 	.button {
 		.box-item;
 		.box-item-block;
 		text-align: center;
 		background: url(../../../assets/pictures/button-wallpaper.png);
 	}
-	// 下拉框
+
 	.select {
 		.box-item;
 		.box-item-block;
@@ -95,7 +93,7 @@ body {
 			background: @color-btn-gray;
 		}
 	}
-	// 输入框
+
 	.text-input {
 		.box-item;
 		background: @color-box-input-deep-grey;
@@ -107,7 +105,7 @@ body {
 			border: 3px @color-box-highlight solid;
 		}
 	}
-	// 复选框
+
 	.checkbox-item,
 	.radio-item {
 		.box-item;
@@ -143,11 +141,11 @@ body {
 			}
 		}
 	}
-	// 文件上传框
+
 	.file-loader {
 		display: none;
 	}
-	// 滑轨
+
 	.range-item {
 		flex-grow: 1;
 		flex-shrink: 1;
@@ -199,7 +197,6 @@ body {
 	}
 }
 
-// 通知
 #notify {
 	.hud-box;
 	position: fixed;
@@ -297,7 +294,6 @@ body {
 	}
 }
 
-// 心跳
 @keyframes icon-animate {
 	0%,
 	100% {
@@ -325,7 +321,6 @@ body {
 	color: #e25555;
 }
 
-// 隐藏VR按键
 #VRButton {
 	display: none;
 }

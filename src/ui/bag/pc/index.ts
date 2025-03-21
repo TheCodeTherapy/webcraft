@@ -10,39 +10,32 @@ class BagPcPlugin {
 
   host: { highlight: () => void; toggleBag: () => void };
 
-  // eslint-disable-next-line
   clickItemEventListener: (e: MouseEvent) => void;
 
-  // eslint-disable-next-line
   keyupItemEventListener: (e: KeyboardEvent) => void;
 
-  // eslint-disable-next-line
   keyupBagOpenEventListener: (e: KeyboardEvent) => void;
 
-  // eslint-disable-next-line
   wheelItemEventListener: (e: WheelEvent) => void;
 
   constructor(bagOuterElem: HTMLElement, host) {
-    // 清除其他插件
     this.bagInnerElem = document.createElement("div");
     this.bagInnerElem.classList.add("pc");
     this.bagOuterElem = bagOuterElem;
     [...this.bagOuterElem.children].forEach((d) => !d.className.includes("bag-box") && d.remove());
     this.bagOuterElem.appendChild(this.bagInnerElem);
     this.host = host;
-    // 添加事件监听
+
     this.clickItemEventListener = BagPcPlugin.getClickItemEventListener(this.host);
     this.keyupItemEventListener = BagPcPlugin.getKeyupItemEventListener(this.host);
     this.keyupBagOpenEventListener = BagPcPlugin.getKeyupBagOpenEventListener(this.host);
     this.wheelItemEventListener = BagPcPlugin.getWheelItemEventListener(this.host);
   }
 
-  // 调整位置
   place() {
     this;
   }
 
-  // 开启监听
   listen() {
     this.bagInnerElem.addEventListener("click", this.clickItemEventListener);
     document.addEventListener("keyup", this.keyupItemEventListener);
@@ -50,7 +43,6 @@ class BagPcPlugin {
     document.addEventListener("wheel", this.wheelItemEventListener);
   }
 
-  // 关闭监听
   pause() {
     this.bagInnerElem.removeEventListener("click", this.clickItemEventListener);
     document.removeEventListener("keyup", this.keyupItemEventListener);
@@ -63,7 +55,6 @@ class BagPcPlugin {
     this.bagInnerElem.remove();
   }
 
-  // 点击背包框激活对应元素??
   static getClickItemEventListener(host) {
     return (e) => {
       e.stopPropagation();
@@ -76,7 +67,6 @@ class BagPcPlugin {
     };
   }
 
-  // 按0-9激活不同背包框
   static getKeyupItemEventListener(host) {
     return (e) => {
       if (host.bagBox.working) return;
@@ -88,7 +78,6 @@ class BagPcPlugin {
     };
   }
 
-  // 滚轮激活不同背包框
   static getWheelItemEventListener(host) {
     let lenCnt = 0;
     return (e) => {
@@ -106,7 +95,6 @@ class BagPcPlugin {
     };
   }
 
-  // 按e开关背包
   static getKeyupBagOpenEventListener(host) {
     return (e) => {
       if (e.key === "e" || e.key === "E") {

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { blockGeom, blockLoader } from "./Loader";
-import { BlockLog } from "../utils/types/block";
+import { BlockLog } from "./Types";
 import { Core } from "./Core";
 
 export class BlockAction {

@@ -77,7 +77,7 @@ export function generateFragSync(
     for (let j = stz; j < edz; j += 1) {
       const y = Math.floor(noiseGen.noise(i / seedGap, j / seedGap, seed) * maxHeight);
       const adjY = Math.min(Math.max(y, sty), edy);
-      // 岩石和水
+
       if (adjY < horizonHeight) {
         if (y >= sty || y <= edy) insertInstancedBlock(blockFragment, base, i, y, j);
         const blockType = blockFragment.types[water]?.blocks.type;
@@ -87,9 +87,11 @@ export function generateFragSync(
           for (let yy = adjY + 1; yy <= horizonHeight && yy <= edy; yy += 1)
             insertInstancedBlock(blockFragment, water, i, yy, j);
       } else {
-        // 表面和树
-        if (y >= sty || y <= edy) insertInstancedBlock(blockFragment, surface, i, y, j);
-        // tree 生成
+        if (y >= sty || y <= edy) {
+          insertInstancedBlock(blockFragment, surface, i, y, j);
+        }
+
+        // tree
         if (y > treeBaseHeight) {
           const treeType = y % treeTypes.length;
           const treeHeight = Math.floor(noiseGen.noise(i / treeSeedGap, j / treeSeedGap, treeSeed) * maxHeight * 1.5);
@@ -130,7 +132,7 @@ export function generateFragSync(
         }
       }
 
-      // cloud 生成
+      // clouds
       const cloudGen = noiseGen.noise(i / cloudSeedGap, j / cloudSeedGap, cloudSeed);
       if (!access && (cloudGen > 0.8 || cloudGen < -0.8)) {
         (blockFragment.cloudPos as number[]).push(

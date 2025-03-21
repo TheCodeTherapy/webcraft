@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { ImprovedNoise } from "three/examples/jsm/math/ImprovedNoise";
-import { iBlockFragment } from "../utils/types/block";
+import { iBlockFragment } from "./Types";
 import { Core } from "./Core";
 import { TerrainGenerate } from "./TerrainGenerate";
 import { config, symConfig } from "./_config";
@@ -13,7 +13,7 @@ export class Terrain {
   treeSeed: number;
   generator: TerrainGenerate;
   size: number;
-  fragmentSize: number; // Size of each terrain fragment
+  fragmentSize: number;
   originX: number;
   originZ: number;
   thread: number;

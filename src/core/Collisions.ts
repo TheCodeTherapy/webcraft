@@ -1,7 +1,7 @@
 import { generateFragSync } from "./TerrainFragSync";
 import { symConfig, config } from "./_config";
 import { getDir } from "../utils/get-dir";
-import { iBlockFragment } from "../utils/types/block";
+import { iBlockFragment } from "./Types";
 import Log from "./Log";
 import { Euler, Intersection, Raycaster } from "three";
 import { Vector3 } from "three";

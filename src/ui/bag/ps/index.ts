@@ -16,7 +16,6 @@ class BagPsPlugin {
   curHighlightAllBlockIdx: number;
 
   constructor(bagOuterElem: HTMLElement, host) {
-    // 清除其他插件
     this.bagInnerElem = document.createElement("div");
     this.bagInnerElem.classList.add("ps");
     this.bagOuterElem = bagOuterElem;
@@ -49,7 +48,6 @@ class BagPsPlugin {
     } else this.keyPressed[2] = false;
 
     if (gamepad.buttons[1].pressed) {
-      // 切换背包中激活者
       if (!this.keyPressed[1] && this.host.bagBox.working) {
         config.bag.bagBox.activeIdx = (config.bag.bagBox.activeIdx + 1) % 10;
         this.curHighlightAllBlockIdx = config.bag.bagItem[config.bag.bagBox.activeIdx];
@@ -60,7 +58,6 @@ class BagPsPlugin {
     } else this.keyPressed[1] = false;
 
     if (gamepad.buttons[12].pressed) {
-      // 上
       if (!this.keyPressed[12] && this.host.bagBox.working) {
         this.curHighlightAllBlockIdx = (this.curHighlightAllBlockIdx - 10 + 50) % 50;
         config.bag.bagItem[config.bag.bagBox.activeIdx] = this.curHighlightAllBlockIdx;
@@ -71,7 +68,6 @@ class BagPsPlugin {
     } else this.keyPressed[12] = false;
 
     if (gamepad.buttons[13].pressed) {
-      // 下
       if (!this.keyPressed[13] && this.host.bagBox.working) {
         this.curHighlightAllBlockIdx = (this.curHighlightAllBlockIdx + 10 + 50) % 50;
         config.bag.bagItem[config.bag.bagBox.activeIdx] = this.curHighlightAllBlockIdx;
@@ -82,7 +78,6 @@ class BagPsPlugin {
     } else this.keyPressed[13] = false;
 
     if (gamepad.buttons[14].pressed) {
-      // 左
       if (!this.keyPressed[14] && this.host.bagBox.working) {
         this.curHighlightAllBlockIdx = (this.curHighlightAllBlockIdx - 1 + 50) % 50;
         config.bag.bagItem[config.bag.bagBox.activeIdx] = this.curHighlightAllBlockIdx;
@@ -93,7 +88,6 @@ class BagPsPlugin {
     } else this.keyPressed[14] = false;
 
     if (gamepad.buttons[15].pressed) {
-      // 右
       if (!this.keyPressed[15] && this.host.bagBox.working) {
         this.curHighlightAllBlockIdx = (this.curHighlightAllBlockIdx + 1 + 50) % 50;
         config.bag.bagItem[config.bag.bagBox.activeIdx] = this.curHighlightAllBlockIdx;
@@ -106,18 +100,15 @@ class BagPsPlugin {
     this;
   }
 
-  // 调整位置
   place() {
     window.addEventListener("gamepadconnected", () => null);
     this;
   }
 
-  // 开启监听
   listen() {
     this;
   }
 
-  // 关闭监听
   pause() {
     this;
   }

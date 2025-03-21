@@ -219,7 +219,6 @@ class MultiPlay {
   }
 
   static getConfig() {
-    // eslint-disable-next-line
     return (({ seed, cloudSeed, treeSeed, weather, state, log }) => ({
       seed,
       cloudSeed,
